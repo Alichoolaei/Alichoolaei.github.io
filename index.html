@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ali Choolaei – Musician &amp; Composer</title>
+<meta name="description" content="Ali Choolaei is an Iranian musician and composer based in Germany, working with Persian instruments, electronics and sound design, and writing music for film.">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Instrument+Sans:wght@400;500&family=Caveat:wght@500&display=swap');
+:root{
+  --lapis:#111b36; --lapis-2:#18264a; --ivory:#ece8dc; --muted:#a9b0c4;
+  --turquoise:#5cc2b8; --saffron:#d9a441; --line:#2b3a66;
+  --serif:'Fraunces',Georgia,serif;
+  --sans:'Instrument Sans',system-ui,-apple-system,'Segoe UI',sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--lapis);color:var(--ivory);font:17px/1.65 var(--sans);-webkit-font-smoothing:antialiased}
+a{color:var(--turquoise);text-underline-offset:3px}
+a:hover{color:var(--saffron)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--saffron);outline-offset:3px}
+
+/* Hero */
+.hero{position:relative;min-height:88vh;display:flex;flex-direction:column;justify-content:flex-end;padding:0 6vw 9vh;overflow:hidden}
+#strings{position:absolute;inset:0;width:100%;height:100%;display:block}
+.hero-text{position:relative;pointer-events:none;max-width:900px}
+.hero h1{font:500 clamp(3rem,11vw,8.5rem)/.9 var(--serif);letter-spacing:-.02em;margin:0 0 1.2rem}
+.hero p{font:400 clamp(1.2rem,2.6vw,1.7rem)/1.35 var(--serif);color:var(--muted);margin:0;max-width:32ch}
+.pad{position:absolute;z-index:1;touch-action:none}
+.touch{position:absolute;z-index:2;margin:0;font:500 1.75rem/1.1 'Caveat','Segoe Script','Bradley Hand',cursive;color:var(--muted);pointer-events:none;transition:opacity .25s}
+@media(max-width:600px){.touch{font-size:1.45rem}}
+.snd{position:absolute;left:50%;top:60vh;transform:translateX(-50%);white-space:nowrap;z-index:2;font:500 .8rem var(--sans);color:var(--lapis);background:var(--saffron);border:0;border-radius:2rem;padding:.35rem .95rem;cursor:pointer}
+.snd:hover{background:var(--ivory)}
+.snd[aria-pressed="true"]{background:none;color:var(--saffron);box-shadow:inset 0 0 0 1.5px var(--saffron)}
+nav{position:absolute;top:calc(env(safe-area-inset-top,0px) + 1.2rem);left:6vw;display:flex;gap:1.4rem;font-size:.95rem}
+nav a{color:var(--ivory);text-decoration:none;border-bottom:1px solid var(--line)}
+nav a:hover{border-color:var(--saffron);color:var(--ivory)}
+
+/* Sections */
+main{padding:0 6vw}
+section{max-width:960px;margin:0 auto;padding:6rem 0 2rem}
+h2{font:500 clamp(2rem,4vw,2.8rem)/1.1 var(--serif);margin:0 0 1.8rem}
+.about p{max-width:60ch;font-size:1.12rem;margin:0 0 1.1rem}
+.instruments{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1.6rem;padding:0;list-style:none}
+.instruments li{border:1px solid var(--turquoise);color:var(--turquoise);padding:.25rem .9rem;border-radius:2rem;font-size:.92rem}
+
+/* Film list */
+.work{border-top:1px solid var(--line)}
+.film{padding:1.5rem 0;border-bottom:1px solid var(--line)}
+.date{font:400 .95rem var(--sans);color:var(--saffron);letter-spacing:.02em;margin-left:.3rem;white-space:nowrap}
+.film h3{font:600 1.5rem/1.25 var(--serif);margin:0}
+.film .by{margin:.15rem 0 .5rem;color:var(--muted);font-size:.95rem}
+.film .links{display:flex;flex-wrap:wrap;gap:1.2rem;font-size:.95rem}
+h1,h2,h3,.hero p{font-variant-numeric:lining-nums}
+.vid{display:block;width:100%;max-width:760px;margin-top:1rem;border-radius:6px;background:#000}
+.film .desc{margin:0 0 .7rem;max-width:62ch}
+@media(max-width:600px){nav{flex-wrap:wrap;gap:.4rem 1rem;right:6vw;font-size:.85rem}}
+
+/* Contact */
+.contact p{max-width:50ch;margin:0 0 1rem}
+footer{max-width:960px;margin:0 auto;padding:5rem 0 3rem;color:var(--muted);font-size:.9rem}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <canvas id="strings" aria-hidden="true"></canvas>
+  <div class="pad" id="pad" aria-hidden="true"></div>
+  <button class="snd" id="snd" type="button" aria-pressed="false">♪ Turn sound on</button>
+  <p class="touch" id="touch">Touch the strings</p>
+  <nav aria-label="Main">
+    <a href="#about">About</a>
+    <a href="#installation">Installation</a>
+    <a href="#film">Music for Picture</a>
+    <a href="#performances">Performances</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <div class="hero-text">
+    <h1>Ali Choolaei</h1>
+    <p>Musician and composer. Setar, tar, kamancheh, electronics, film.</p>
+  </div>
+</header>
+
+<main>
+  <section id="about" class="about">
+    <h2>About</h2>
+    <p>Ali Choolaei is an Iranian musician and composer based in Germany who enjoys improvising and exploring new sounds. He plays traditional Persian instruments such as the setar, the tar and the kamancheh, and also works with electronics and sound design.</p>
+    <p>He also composes music for films and experiments with new approaches to music and sound installations.</p>
+    <ul class="instruments" aria-label="Instruments and tools">
+      <li>Setar</li><li>Tar</li><li>Kamancheh</li><li>Electronics</li><li>Sound design</li><li>Sound installation</li>
+    </ul>
+  </section>
+
+  <section id="installation">
+    <h2>Sound Installation</h2>
+    <div class="work">
+      <article class="film">
+        <div>
+          <h3>Singing Ulmus</h3>
+          <p class="by">Sound installation. Prager Platz, Berlin.</p>
+          <p class="desc">A trunk of an American elm (<em>Ulmus americana</em>), carbonized and sealed with tung oil, becomes an instrument. A piezo sensor inside the wood is connected to a Raspberry Pi. When someone knocks on the trunk, the Pi reads the sensor and the tree answers with sound.</p>
+          <p class="by">Materials: carbonized American elm, tung oil, piezo sensor, Raspberry Pi.</p>
+          <video class="vid" controls playsinline preload="metadata" src="singingulmus.mp4#t=0.1" aria-label="Singing Ulmus, sound installation video"></video>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section id="film">
+    <h2>Music for Picture</h2>
+    <div class="work">
+
+      <article class="film">
+        <div>
+          <h3>Ça reste entre nous <span class="date">(2026)</span></h3>
+          <p class="by">Documentary film by Maryam Shapoorian. Original music.</p>
+          <div class="links">
+            <a href="https://www.film-documentaire.fr/4DACTION/w_fiche_film/78906">Film page</a>
+            <a href="https://vimeo.com/1164568932">Trailer</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="film">
+        <div>
+          <h3>LandStone <span class="date">(2026)</span></h3>
+          <p class="by">Documentary film by Faraz Fadaian. Original music.</p>
+          <div class="links"><a href="https://www.swissfilms.ch/de/movie/landstone/344b49749e8f461eb1f1e583ef456841">Film page</a></div>
+        </div>
+      </article>
+
+      <article class="film">
+        <div>
+          <h3>A Place of Gradual Decline <span class="date">(2026)</span></h3>
+          <p class="by">Music for photographic work by Farshad Fadaian.</p>
+          <div class="links"><a href="https://www.farshadfadaian.com/a-place-of-gradual-decline">View work</a></div>
+        </div>
+      </article>
+
+      <article class="film">
+        <div>
+          <h3>Vincilla – Vanilla <span class="date">(2025–2026)</span></h3>
+          <p class="by">Short film by Manuel Höhne. Original music.</p>
+          <div class="links"><a href="https://www.crew-united.com/de/Vincilla-Vanilla__352782.html">Film page</a></div>
+        </div>
+      </article>
+
+      <article class="film">
+        <div>
+          <h3>The Doorway <span class="date">(2025–2026)</span></h3>
+          <p class="by">Short film by Shirin Ashkari. Original music and sound design.</p>
+          <div class="links">
+            <a href="https://www.crew-united.com/en/The-Doorway__379567.html">Film page</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="film">
+        <div>
+          <h3>Die Schatten von Ciudad Juárez <span class="date">(2025)</span></h3>
+          <p class="by">Short film by Manuel Höhne. Original music.</p>
+          <div class="links"><a href="https://www.crew-united.com/de/Die-Schatten-von-Ciudad-Juarez__360472.html">Film page</a></div>
+        </div>
+      </article>
+
+      <article class="film">
+        <div>
+          <h3>The House Whose Sun Was Stolen <span class="date">(2025)</span></h3>
+          <p class="by">Documentary by Farshad Fadaian. Original music.</p>
+          <div class="links"><a href="https://www.farshadfadaian.com/the-house-whose-sun-was-stolen">Film page</a></div>
+        </div>
+      </article>
+
+      <article class="film">
+        <div>
+          <h3>It's Confusing <span class="date">(2024–2025)</span></h3>
+          <p class="by">Short film by Shirin Ashkari. Original music.</p>
+          <div class="links"><a href="https://www.crew-united.com/en/It-s-Confusing-Internetfilm__344939.html">Film page</a></div>
+        </div>
+      </article>
+
+      <article class="film">
+        <div>
+          <h3>Luckless Lake <span class="date">(2024)</span></h3>
+          <p class="by">Documentary by Faraz Fadaian. Original music.</p>
+          <div class="links"><a href="https://www.farshadfadaian.com/luckless-lake">Film page</a></div>
+        </div>
+      </article>
+
+      <article class="film">
+        <div>
+          <h3>92-1 <span class="date">(2017)</span></h3>
+          <p class="by">Documentary by Farshad Fadaian. Original music.</p>
+          <div class="links"><a href="https://www.farshadfadaian.com/92-1">Film page</a></div>
+        </div>
+      </article>
+
+      <article class="film">
+        <div>
+          <h3>Sugarcane Field Lovers <span class="date">(2016)</span></h3>
+          <p class="by">Documentary by Farshad Fadaian. Original music.</p>
+          <div class="links"><a href="https://www.farshadfadaian.com/sugarcane-field-lovers">Film page</a></div>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section id="performances">
+    <h2>Performances</h2>
+    <div class="work">
+
+      <article class="film">
+        <div>
+          <h3>10or MØSAIC <span class="date">(2026)</span></h3>
+          <p class="by">Live performance. Guest musician, kamancheh.</p>
+          <p class="desc">Guest kamancheh performances with 10or MØSAIC at Studio db and Arkaoda in Berlin.</p>
+          <div class="links"><a href="https://10or.xyz/events-upcoming-shows">Events &amp; performances</a></div>
+        </div>
+      </article>
+
+      <article class="film">
+        <div>
+          <h3>These Layers Are Not Mine <span class="date">(2026)</span></h3>
+          <p class="by">Live performance. Kamancheh.</p>
+          <p class="desc">A live kamancheh performance in the gallery of painter Shirin Ashkari, at RONDELLprojectspace (B.L.O. Ateliers, Kaskelstr. 55, 10317 Berlin).</p>
+          <div class="links"><a href="https://shirinashkari.com/paintings">Shirin Ashkari</a></div>
+        </div>
+      </article>
+
+      <article class="film">
+        <div>
+          <h3>Klangteppich Festival <span class="date">(2018)</span></h3>
+          <p class="by">Tar and setar. With Valentina Bellanova and Renu.</p>
+          <p class="desc">A performance for tar and setar alongside Valentina Bellanova and Renu at Salon am Moritzplatz, Berlin. The festival is documented on Bandcamp.</p>
+          <div class="links"><a href="https://klangteppichberlin.bandcamp.com/album/festival-2018">Festival 2018 on Bandcamp</a></div>
+        </div>
+      </article>
+
+      <article class="film">
+        <div>
+          <h3>Higher Resonance, Holzmarkt 25 <span class="date">(2017)</span></h3>
+          <p class="by">Collaborative audiovisual performance. Tar.</p>
+          <p class="desc">An audiovisual performance presented by Higher Resonance in collaboration with Birdmilk Collective, with Ali Choolaei on tar, vocals by Hani Mojtahedy, modular synthesizer by Sacha Ketterlin, immersive surround sound by Wisp and Sweet Audio, and visuals by MXMI.</p>
+          <div class="links"><a href="https://www.facebook.com/higherResonance/">Higher Resonance</a></div>
+        </div>
+      </article>
+
+      <article class="film">
+        <div>
+          <h3>Concerts in Jena and Weimar <span class="date">(2017)</span></h3>
+          <p class="by">Tar. Germany.</p>
+          <p class="desc">Collaborative concerts in Weimar and Jena as a tar player, alongside Ali Ghamsari, the acclaimed pianist Lusine Khachatryan, Ali Omidi and Mostafa Omidi.</p>
+        </div>
+      </article>
+
+      <article class="film">
+        <div>
+          <h3>Mehmani Koochak (A Small Party) <span class="date">(2016)</span></h3>
+          <p class="by">Iran tour. Tar and setar, in Ali Ghamsari’s ensemble.</p>
+          <p class="desc">A tour through Rasht, Bandar Abbas, Torbat-e Heydarieh and Yazd, performing classical Iranian improvisations and multimodal compositions.</p>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <h2>Contact</h2>
+    <p>For film scores, sound installations and collaborations, write to
+      <a href="mailto:alichoolaei@gmail.com">alichoolaei@gmail.com</a>.</p>
+    <p>Also on <a href="https://www.instagram.com/alichoolaei/" target="_blank" rel="noopener">Instagram</a>.</p>
+  </section>
+</main>
+
+<footer>© <span id="y">2026</span> Ali Choolaei</footer>
+
+<script>
+document.getElementById('y').textContent = new Date().getFullYear();
+
+
+/* Sound: plucked strings tuned C G A D (Karplus-Strong), made in the browser */
+let G = {}; /* setar geometry, shared by the drawing and the sound */
+const TUNING = [261.63, 196.00, 261.63, 130.81]; /* C4 G3 C4 C3, top string to bottom */
+let actx = null, bufs = [], bus = null, soundOn = false;
+/* the short piece of string behind the bridge rings much higher and shorter, as on a real setar */
+let afterBufs = [], headBufs = [];
+/* a shorter piece of the same string rings higher, in proportion to its length */
+function segFreq(f, ratio){ return Math.min(3600, Math.max(f*2, f*ratio)); }
+function ks(f, t60, secs){
+  const sr = actx.sampleRate, len = Math.floor(sr*secs), N = Math.max(4, Math.round(sr/f)), ring = new Float32Array(N);
+  for(let k=0;k<N;k++) ring[k] = Math.random()*2 - 1;
+  const decay = Math.exp(-6.9 / (f * t60));
+  const b = actx.createBuffer(1, len, sr), d = b.getChannelData(0);
+  let idx = 0;
+  for(let k=0;k<len;k++){
+    const a = ring[idx], c = ring[(idx+1)%N];
+    d[k] = a; ring[idx] = (a*0.5 + c*0.5) * decay; idx = (idx+1)%N;
+  }
+  let peak = 0; for(let k=0;k<len;k++) peak = Math.max(peak, Math.abs(d[k]));
+  for(let k=0;k<len;k++) d[k] /= (peak || 1);
+  const fade = Math.floor(sr*0.1);
+  for(let k=0;k<fade;k++) d[len-1-k] *= k/fade;
+  return b;
+}
+function buildBuffers(){
+  const sr = actx.sampleRate, len = Math.floor(sr * 3.2);
+  /* wooden body: low resonance plus a nasal, bright peak, like a setar */
+  const b1 = actx.createBiquadFilter(); b1.type = 'peaking'; b1.frequency.value = 260; b1.Q.value = 1.2; b1.gain.value = 7;
+  const b2 = actx.createBiquadFilter(); b2.type = 'peaking'; b2.frequency.value = 2300; b2.Q.value = 1.6; b2.gain.value = 5;
+  const lp = actx.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 7500;
+  b1.connect(b2); b2.connect(lp); lp.connect(actx.destination);
+  bus = b1;
+  const Lm = G.bridge - G.nut;
+  afterBufs = TUNING.map(f => ks(segFreq(f, Lm / (G.end - G.bridge)), 0.45, 1.2));
+  headBufs = TUNING.map((f,i) => ks(segFreq(f, Lm / (G.nut - G.pegX[i])), 0.35, 0.9));
+  bufs = TUNING.map(f => {
+    const N = Math.max(4, Math.round(sr / f)), ring = new Float32Array(N);
+    for(let k=0;k<N;k++) ring[k] = Math.random()*2 - 1;
+    /* bright metal-string pluck: only a light smoothing, and a pluck-position comb */
+    for(let k=1;k<N;k++) ring[k] = ring[k]*0.7 + ring[k-1]*0.3;
+    const pp = Math.max(1, Math.floor(N * 0.18));
+    const tmp = ring.slice();
+    for(let k=0;k<N;k++) ring[k] = tmp[k] - tmp[(k+pp)%N];
+    const decay = Math.exp(-6.9 / (f * 2.4));
+    const b = actx.createBuffer(1, len, sr), d = b.getChannelData(0);
+    let idx = 0;
+    for(let k=0;k<len;k++){
+      const a = ring[idx], c = ring[(idx+1)%N];
+      d[k] = a;
+      ring[idx] = (a*0.55 + c*0.45) * decay;
+      idx = (idx+1) % N;
+    }
+    let peak = 0; for(let k=0;k<len;k++) peak = Math.max(peak, Math.abs(d[k]));
+    for(let k=0;k<len;k++) d[k] /= (peak || 1);
+    const fade = Math.floor(sr * 0.3);
+    for(let k=0;k<fade;k++) d[len-1-k] *= k/fade;
+    return b;
+  });
+}
+function sound(i, speed, seg){
+  if(!soundOn || !actx || !bufs[i]) return;
+  const src = actx.createBufferSource(), g = actx.createGain();
+  src.buffer = seg === 'after' ? afterBufs[i] : seg === 'head' ? headBufs[i] : bufs[i];
+  g.gain.value = Math.min(0.4, 0.1 + speed * 0.008) * (seg === 'main' ? 1 : 0.55);
+  src.connect(g).connect(bus);
+  src.start();
+}
+document.getElementById('snd').addEventListener('click', e => {
+  const btn = e.currentTarget;
+  if(!actx){
+    actx = new (window.AudioContext || window.webkitAudioContext)();
+    buildBuffers();
+  }
+  soundOn = !soundOn;
+  if(soundOn){
+    try{ if(navigator.audioSession) navigator.audioSession.type = 'playback'; }catch(err){}
+    actx.resume();
+    /* play one silent tick inside the tap so phones unlock audio */
+    const t = actx.createBufferSource(); t.buffer = actx.createBuffer(1,1,22050); t.connect(actx.destination); t.start(0);
+  }
+  btn.setAttribute('aria-pressed', soundOn);
+  btn.textContent = soundOn ? '♪ Sound on' : '♪ Turn sound on';
+});
+
+/* Four strings, like a setar. Move a pointer across one to pluck it. */
+(function(){
+  const cv = document.getElementById('strings'), ctx = cv.getContext('2d');
+  const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const N = 4, strings = [];
+  let W, H, dpr, running = false, last = null;
+
+  function size(){
+    dpr = window.devicePixelRatio || 1;
+    W = cv.clientWidth; H = cv.clientHeight;
+    cv.width = W * dpr; cv.height = H * dpr;
+    ctx.setTransform(dpr,0,0,dpr,0,0);
+
+    /* setar geometry: head and pegs at left, long fretted neck, figure-eight body at right */
+    const x0 = W*0.06, x1 = W*0.94, span = x1 - x0;
+    const T = Math.max(36, 0.07 * Math.min(H, W*0.5)); /* string 1 to string 4: a setar's neck is slim */
+    const y0 = H*0.18, cy = y0 + T/2, h = T/2 + 5;  /* neck half-height */
+    const narrow = W < 600;
+    let bodyLen = (narrow ? 0.38 : 0.30)*span;      /* drop-shaped body, from neck join to the round end */
+    const R = Math.max(h*1.6, Math.min(bodyLen*0.42, cy - 30, H*0.6 - cy));
+    bodyLen = Math.max(bodyLen, R*2.8);             /* keep the taper long enough so the drop is never squashed */
+    const xC = x1 - R, xT = x1 - bodyLen;
+    G = {x0, x1, T, cy, h, R, xC, xT, nut: x0 + span*(narrow ? 0.14 : 0.09), bridge: xC - R*0.1, end: x1 - R*0.08};
+    G.hx = x0 + 6;
+    /* four pegs: strings 1 and 2 go to the top pegs (left, then right), strings 3 and 4 to the bottom pegs (left, then right) */
+    G.pegX = [0.2, 0.66, 0.34, 0.82].map(f => G.hx + (G.nut - G.hx)*f);
+    const sb = document.getElementById('snd');
+    sb.style.left = G.xC + 'px';
+    sb.style.top = (G.cy + G.R + 14) + 'px';
+    const tt = document.getElementById('touch');
+    tt.style.left = G.nut + 'px'; tt.style.top = (G.cy + G.h + 18) + 'px';
+    tt.style.maxWidth = Math.max(120, G.xT - G.nut - 8) + 'px';
+    const pad = document.getElementById('pad');
+    pad.style.left = G.hx + 'px'; pad.style.width = (G.end - G.hx) + 'px';
+    pad.style.top = (G.cy - G.h - 14) + 'px'; pad.style.height = (G.h*2 + 28) + 'px';
+    const offs = [0, 0.4, 0.8, 1];                  /* strings 3 and 4 sit close together */
+    for(let i=0;i<N;i++){
+      strings[i] = strings[i] || {amp:0, t:0, phase:0};
+      strings[i].y = y0 + offs[i]*T;
+    }
+    G.ys = strings.map(q => q.y);
+    draw(0);
+  }
+
+  function drawSetar(){
+    const {x0, x1, cy, h, R, xC, xT, nut, bridge, end} = G;
+    const ink = 'rgba(236,232,220,0.42)', wood = '#1b2a52';
+    ctx.lineJoin = 'round'; ctx.lineCap = 'round';
+
+    /* body: a drop, narrow where the neck joins and round at the far end */
+    const len = xC - xT;
+    ctx.beginPath();
+    ctx.moveTo(xT, cy - h);
+    const k1 = xT + len*0.45, k2 = xC - Math.min(R*1.1, len*0.5);
+    ctx.bezierCurveTo(k1, cy - h, k2, cy - R, xC, cy - R);
+    ctx.arc(xC, cy, R, -Math.PI/2, Math.PI/2);
+    ctx.bezierCurveTo(k2, cy + R, k1, cy + h, xT, cy + h);
+    ctx.closePath();
+    ctx.fillStyle = wood; ctx.strokeStyle = ink; ctx.lineWidth = 2.5;
+    ctx.fill(); ctx.stroke();
+    /* soundboard edge */
+    ctx.lineWidth = 1; ctx.strokeStyle = 'rgba(217,164,65,0.35)';
+    ctx.beginPath(); ctx.arc(xC, cy, R*0.8, 0, Math.PI*2); ctx.stroke();
+
+    /* neck */
+    ctx.fillStyle = '#223562'; ctx.strokeStyle = ink; ctx.lineWidth = 1.5;
+    ctx.beginPath(); ctx.rect(nut, cy-h, xT-nut, h*2); ctx.fill(); ctx.stroke();
+
+    /* frets, spaced like a scale */
+    ctx.lineWidth = 1; ctx.strokeStyle = 'rgba(236,232,220,0.3)';
+    const L = xT - nut - 4;
+    for(let n=1;n<=22;n++){
+      const x = nut + L*(1 - Math.pow(2,-n/12))/0.72;
+      if(x > xT - 3) break;
+      ctx.beginPath(); ctx.moveTo(x, cy-h); ctx.lineTo(x, cy+h); ctx.stroke();
+    }
+
+    /* head with four pegs */
+    ctx.fillStyle = '#223562'; ctx.strokeStyle = ink; ctx.lineWidth = 1.5;
+    const hh = h*0.9, hx = x0 + 6, hw = nut - hx;
+    ctx.beginPath(); ctx.rect(hx, cy-hh, hw, hh*2); ctx.fill(); ctx.stroke();
+    ctx.strokeStyle = 'rgba(217,164,65,0.8)'; ctx.fillStyle = 'rgba(217,164,65,0.8)'; ctx.lineWidth = 2;
+    for(let i=0;i<4;i++){
+      const px = G.pegX[i], dir = i < 2 ? -1 : 1;
+      ctx.beginPath(); ctx.moveTo(px, G.ys[i]); ctx.lineTo(px, cy+dir*(hh+h*0.5)); ctx.stroke();
+      ctx.beginPath(); ctx.arc(px, cy+dir*(hh+h*0.5), 2.6, 0, Math.PI*2); ctx.fill();
+    }
+
+    /* nut and bridge */
+    ctx.strokeStyle = 'rgba(236,232,220,0.8)'; ctx.lineWidth = 2.5;
+    ctx.beginPath(); ctx.moveTo(nut, cy-h); ctx.lineTo(nut, cy+h); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(bridge, cy-h*0.9); ctx.lineTo(bridge, cy+h*0.9); ctx.stroke();
+    /* tailpiece at the end of the body, where the strings are tied */
+    ctx.lineWidth = 3.5; ctx.strokeStyle = 'rgba(217,164,65,0.8)';
+    ctx.beginPath(); ctx.moveTo(end + 2, cy-h*0.7); ctx.lineTo(end + 2, cy+h*0.7); ctx.stroke();
+  }
+
+  function draw(now){
+    ctx.clearRect(0,0,W,H);
+    drawSetar();
+    let alive = false;
+    const colors = ['#5cc2b8','#d9a441','#5cc2b8','#d9a441'];
+    strings.forEach((s,i)=>{
+      s.amp *= 0.985;
+      if(s.amp < 0.2) s.amp = 0; else alive = true;
+      ctx.beginPath();
+      ctx.lineWidth = i === 3 ? 3.2 : 1.4; /* the fourth string is thicker */
+      ctx.strokeStyle = colors[i];
+      ctx.globalAlpha = 0.9;
+      const xa = G.pegX[i], xb = G.end, steps = 140;
+      for(let k=0;k<=steps;k++){
+        const x = xa + (xb-xa)*k/steps;
+        let disp = 0;
+        if(s.seg === 'head'){
+          if(x <= G.nut) disp = Math.sin(Math.PI*(x-xa)/(G.nut-xa));
+        } else if(s.seg === 'after'){
+          if(x >= G.bridge) disp = Math.sin(Math.PI*(x-G.bridge)/(xb-G.bridge));
+        } else if(x >= G.nut && x <= G.bridge){
+          disp = Math.sin(Math.PI*(x-G.nut)/(G.bridge-G.nut));
+        }
+        const y = s.y + disp * s.amp * Math.sin(now/22 * (s.seg === 'main' || !s.seg ? 1 + i*0.35 : 3) + s.phase);
+        k ? ctx.lineTo(x,y) : ctx.moveTo(x,y);
+      }
+      ctx.stroke();
+    });
+    ctx.globalAlpha = 1;
+    if(alive && !still){ requestAnimationFrame(draw); running = true; } else running = false;
+  }
+
+  /* a little commentary while you play */
+  const NOTES = [[1,'Yes, just like that.'],[4,'Careful: this setar has opinions.'],[9,'Taking requests? Sadly, the setar does not.'],[16,'Congratulations, you are officially in the band.'],[30,'Okay, you can stop now. Or not.']];
+  let strums = 0;
+  function funny(){
+    strums++;
+    const n = NOTES.find(x => x[0] === strums);
+    if(!n) return;
+    const tt = document.getElementById('touch');
+    tt.style.opacity = 0;
+    setTimeout(() => { tt.textContent = n[1]; tt.style.opacity = 1; }, 250);
+  }
+
+  function pluck(x,y){
+    if(x < G.pegX[0] || x > G.end) { last = null; return; }
+    const seg = x < G.nut ? 'head' : (x > G.bridge ? 'after' : 'main');
+    let hit = false;
+    strings.forEach((s,i)=>{
+      if(last !== null && x >= G.pegX[i] && (last - s.y) * (y - s.y) < 0){
+        hit = true;
+        sound(i, Math.abs(y - last), seg);
+        s.amp = Math.max(5, Math.min(22, G.T*0.22, 8 + Math.abs(y - last) * 0.6));
+        s.phase = Math.random()*6;
+        s.seg = seg;
+        if(seg !== 'main') s.amp *= 0.5;
+      }
+    });
+    if(hit) funny();
+    last = y;
+    if(!running && !still){ running = true; requestAnimationFrame(draw); }
+  }
+
+  function pos(e){
+    const r = cv.getBoundingClientRect();
+    return [e.clientX - r.left, e.clientY - r.top];
+  }
+  const hero = cv.parentElement;
+  hero.addEventListener('pointermove', e => { const p = pos(e); pluck(p[0], p[1]); });
+  hero.addEventListener('pointerleave', () => { last = null; });
+  /* the strip over the strings keeps swipes for plucking; the rest of the page scrolls normally */
+  const padEl = document.getElementById('pad');
+  padEl.addEventListener('pointermove', e => { const p = pos(e); pluck(p[0], p[1]); });
+  ['pointerup','pointercancel','pointerleave'].forEach(t => padEl.addEventListener(t, () => { last = null; }));
+  addEventListener('resize', size);
+  size();
+})();
+</script>
+</body>
+</html>
